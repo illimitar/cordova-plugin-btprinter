@@ -17,8 +17,13 @@
     <!-- android -->
     <platform name="android">
         <config-file target="AndroidManifest.xml" parent="/*">
-            <uses-permission android:name="android.permission.BLUETOOTH" />
-            <uses-permission android:name="android.permission.BLUETOOTH_ADMIN"/>
+            <!-- android:maxSdkVersion precisa ficar identico ao que cordova-plugin-bluetoothle
+                 e cordova-plugin-ble-central declaram para os mesmos nomes de permissao: o
+                 Cordova so deduplica uses-permission entre plugins quando o XML injetado e
+                 textualmente igual, senao o conflito nunca se resolve e a permissao some do
+                 manifest final. -->
+            <uses-permission android:name="android.permission.BLUETOOTH" android:maxSdkVersion="30" />
+            <uses-permission android:name="android.permission.BLUETOOTH_ADMIN" android:maxSdkVersion="30" />
         </config-file>
         <source-file src="src/android/com/kbarrios/btprinter/BluetoothPrinter.java" target-dir="src/android/com/kbarrios/btprinter" />
         
